@@ -1,0 +1,178 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+    >shelljs-nodecli (v0.1.1)</a>
+</h1>
+<h4>ShellJS Node CLI Extension</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.shelljs-nodecli">module shelljs-nodecli</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.shelljs-nodecli.exec">
+            function <span class="apidocSignatureSpan">shelljs-nodecli.</span>exec
+            <span class="apidocSignatureSpan">(name)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.shelljs-nodecli.getPath">
+            function <span class="apidocSignatureSpan">shelljs-nodecli.</span>getPath
+            <span class="apidocSignatureSpan">(name, root)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.shelljs-nodecli" id="apidoc.module.shelljs-nodecli">module shelljs-nodecli</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.shelljs-nodecli.exec" id="apidoc.element.shelljs-nodecli.exec">
+        function <span class="apidocSignatureSpan">shelljs-nodecli.</span>exec
+        <span class="apidocSignatureSpan">(name)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">exec = function (name) {
+    var cliPath = this.getPath(name),
+        cmd = [cliPath],
+        args = [],
+        i = 1,
+        len = arguments.length;
+
+    if (cliPath) {
+        while (i &#x3c; len &#x26;&#x26; (typeof arguments[i] === &#x22;string&#x22;)) {
+            cmd.push(arguments[i]);
+            i++;
+        }
+
+        args.push(cmd.join(&#x22; &#x22;));
+
+        while (i &#x3c; len) {
+            args.push(arguments[i]);
+            i++;
+        }
+
+        return exec.apply(null, args);
+    } else {
+        throw new Error(&#x22;Couldn&#x27;t find &#x22; + name + &#x22;.&#x22;);
+    }
+
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+## The Solution
+
+Since Node binaries are specified in their `package.json` files, it&#x27;s actually pretty easy to look up the location of the runtime
+ file and get the path. That&#x27;s where the ShellJS Node CLI extension comes in:
+
+```js
+var nodeCLI = require(&#x22;shelljs-nodecli&#x22;);
+
+nodeCLI.<span class="apidocCodeKeywordSpan">exec</span>(&#x22;eslint&#x22;, &#x22;myfile.js&#x22;);
+```
+
+The nodeCLI utility has its own `exec()` that is specifically for use when executing Node CLIs. It searches through the working
+directory&#x27;s `node_modules` directory to find a locally installed utility. If it&#x27;s not found there, then it searches globally
+. If it&#x27;s still not found, then an error is thrown.
+
+You can pass in as many string arguments as you&#x27;d like, and they will automatically be concatenated together with a space in
+ between, such as:
+
+```js
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.shelljs-nodecli.getPath" id="apidoc.element.shelljs-nodecli.getPath">
+        function <span class="apidocSignatureSpan">shelljs-nodecli.</span>getPath
+        <span class="apidocSignatureSpan">(name, root)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getPath = function (name, root) {
+
+    var pkg = getPackage(name, root || &#x22;&#x22;);
+
+    if (pkg) {
+        if (pkg.bin &#x26;&#x26; pkg.bin[name]) {
+            return &#x22;node &#x22; + path.join(root || &#x22;&#x22;, &#x22;node_modules&#x22;, name, pkg.bin[name]).replace(/\\/g, &#x22;/&#x22;);
+        }
+    } else if (which(name)) {
+        return name;
+    }
+
+    return &#x22;&#x22;;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
