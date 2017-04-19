@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,15 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-    >shelljs-nodecli (v0.1.1)</a>
+    <a>shelljs-nodecli (v0.1.1)</a>
 </h1>
 <h4>ShellJS Node CLI Extension</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.shelljs-nodecli">module shelljs-nodecli</a><ol>
 
@@ -128,41 +123,41 @@
         len = arguments.length;
 
     if (cliPath) {
-        while (i &#x3c; len &#x26;&#x26; (typeof arguments[i] === &#x22;string&#x22;)) {
+        while (i &lt; len &amp;&amp; (typeof arguments[i] === "string")) {
             cmd.push(arguments[i]);
             i++;
         }
 
-        args.push(cmd.join(&#x22; &#x22;));
+        args.push(cmd.join(" "));
 
-        while (i &#x3c; len) {
+        while (i &lt; len) {
             args.push(arguments[i]);
             i++;
         }
 
         return exec.apply(null, args);
     } else {
-        throw new Error(&#x22;Couldn&#x27;t find &#x22; + name + &#x22;.&#x22;);
+        throw new Error("Couldn't find " + name + ".");
     }
 
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ## The Solution
 
-Since Node binaries are specified in their `package.json` files, it&#x27;s actually pretty easy to look up the location of the runtime
- file and get the path. That&#x27;s where the ShellJS Node CLI extension comes in:
+Since Node binaries are specified in their `package.json` files, it's actually pretty easy to look up the location of the runtime
+ file and get the path. That's where the ShellJS Node CLI extension comes in:
 
 ```js
-var nodeCLI = require(&#x22;shelljs-nodecli&#x22;);
+var nodeCLI = require("shelljs-nodecli");
 
-nodeCLI.<span class="apidocCodeKeywordSpan">exec</span>(&#x22;eslint&#x22;, &#x22;myfile.js&#x22;);
+nodeCLI.<span class="apidocCodeKeywordSpan">exec</span>("eslint", "myfile.js");
 ```
 
 The nodeCLI utility has its own `exec()` that is specifically for use when executing Node CLIs. It searches through the working
-directory&#x27;s `node_modules` directory to find a locally installed utility. If it&#x27;s not found there, then it searches globally
-. If it&#x27;s still not found, then an error is thrown.
+directory's `node_modules` directory to find a locally installed utility. If it's not found there, then it searches globally
+. If it's still not found, then an error is thrown.
 
-You can pass in as many string arguments as you&#x27;d like, and they will automatically be concatenated together with a space in
+You can pass in as many string arguments as you'd like, and they will automatically be concatenated together with a space in
  between, such as:
 
 ```js
@@ -180,24 +175,24 @@ You can pass in as many string arguments as you&#x27;d like, and they will autom
     <ul>
     <li>description and source-code<pre class="apidocCodePre">getPath = function (name, root) {
 
-    var pkg = getPackage(name, root || &#x22;&#x22;);
+    var pkg = getPackage(name, root || "");
 
     if (pkg) {
-        if (pkg.bin &#x26;&#x26; pkg.bin[name]) {
-            return &#x22;node &#x22; + path.join(root || &#x22;&#x22;, &#x22;node_modules&#x22;, name, pkg.bin[name]).replace(/\\/g, &#x22;/&#x22;);
+        if (pkg.bin &amp;&amp; pkg.bin[name]) {
+            return "node " + path.join(root || "", "node_modules", name, pkg.bin[name]).replace(/\\/g, "/");
         }
     } else if (which(name)) {
         return name;
     }
 
-    return &#x22;&#x22;;
+    return "";
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
      * @param {...string} [moreOptions] Additional options to append to the command.
      * @param {Object} [options] Same options as exec().
      * @param {Function} [callback] The function to call when executing async. Just
      *      including this function changes this method to be async automatically.
-     * @returns {Object} An object containing &#x22;output&#x22; and &#x22;code&#x22; for the exit code.
+     * @returns {Object} An object containing "output" and "code" for the exit code.
      */
     exec: function(name) {
 var cliPath = this.<span class="apidocCodeKeywordSpan">getPath</span>(name),
@@ -207,7 +202,7 @@ var cliPath = this.<span class="apidocCodeKeywordSpan">getPath</span>(name),
     len = arguments.length;
 
 if (cliPath) {
-    while (i &#x3c; len &#x26;&#x26; (typeof arguments[i] === &#x22;string&#x22;)) {
+    while (i &lt; len &amp;&amp; (typeof arguments[i] === "string")) {
 ...</pre></li>
     </ul>
 
@@ -235,41 +230,41 @@ if (cliPath) {
         len = arguments.length;
 
     if (cliPath) {
-        while (i &#x3c; len &#x26;&#x26; (typeof arguments[i] === &#x22;string&#x22;)) {
+        while (i &lt; len &amp;&amp; (typeof arguments[i] === "string")) {
             cmd.push(arguments[i]);
             i++;
         }
 
-        args.push(cmd.join(&#x22; &#x22;));
+        args.push(cmd.join(" "));
 
-        while (i &#x3c; len) {
+        while (i &lt; len) {
             args.push(arguments[i]);
             i++;
         }
 
         return exec.apply(null, args);
     } else {
-        throw new Error(&#x22;Couldn&#x27;t find &#x22; + name + &#x22;.&#x22;);
+        throw new Error("Couldn't find " + name + ".");
     }
 
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ## The Solution
 
-Since Node binaries are specified in their `package.json` files, it&#x27;s actually pretty easy to look up the location of the runtime
- file and get the path. That&#x27;s where the ShellJS Node CLI extension comes in:
+Since Node binaries are specified in their `package.json` files, it's actually pretty easy to look up the location of the runtime
+ file and get the path. That's where the ShellJS Node CLI extension comes in:
 
 ```js
-var nodeCLI = require(&#x22;shelljs-nodecli&#x22;);
+var nodeCLI = require("shelljs-nodecli");
 
-nodeCLI.<span class="apidocCodeKeywordSpan">exec</span>(&#x22;eslint&#x22;, &#x22;myfile.js&#x22;);
+nodeCLI.<span class="apidocCodeKeywordSpan">exec</span>("eslint", "myfile.js");
 ```
 
 The nodeCLI utility has its own `exec()` that is specifically for use when executing Node CLIs. It searches through the working
-directory&#x27;s `node_modules` directory to find a locally installed utility. If it&#x27;s not found there, then it searches globally
-. If it&#x27;s still not found, then an error is thrown.
+directory's `node_modules` directory to find a locally installed utility. If it's not found there, then it searches globally
+. If it's still not found, then an error is thrown.
 
-You can pass in as many string arguments as you&#x27;d like, and they will automatically be concatenated together with a space in
+You can pass in as many string arguments as you'd like, and they will automatically be concatenated together with a space in
  between, such as:
 
 ```js
@@ -287,24 +282,24 @@ You can pass in as many string arguments as you&#x27;d like, and they will autom
     <ul>
     <li>description and source-code<pre class="apidocCodePre">getPath = function (name, root) {
 
-    var pkg = getPackage(name, root || &#x22;&#x22;);
+    var pkg = getPackage(name, root || "");
 
     if (pkg) {
-        if (pkg.bin &#x26;&#x26; pkg.bin[name]) {
-            return &#x22;node &#x22; + path.join(root || &#x22;&#x22;, &#x22;node_modules&#x22;, name, pkg.bin[name]).replace(/\\/g, &#x22;/&#x22;);
+        if (pkg.bin &amp;&amp; pkg.bin[name]) {
+            return "node " + path.join(root || "", "node_modules", name, pkg.bin[name]).replace(/\\/g, "/");
         }
     } else if (which(name)) {
         return name;
     }
 
-    return &#x22;&#x22;;
+    return "";
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
      * @param {...string} [moreOptions] Additional options to append to the command.
      * @param {Object} [options] Same options as exec().
      * @param {Function} [callback] The function to call when executing async. Just
      *      including this function changes this method to be async automatically.
-     * @returns {Object} An object containing &#x22;output&#x22; and &#x22;code&#x22; for the exit code.
+     * @returns {Object} An object containing "output" and "code" for the exit code.
      */
     exec: function(name) {
 var cliPath = this.<span class="apidocCodeKeywordSpan">getPath</span>(name),
@@ -314,7 +309,7 @@ var cliPath = this.<span class="apidocCodeKeywordSpan">getPath</span>(name),
     len = arguments.length;
 
 if (cliPath) {
-    while (i &#x3c; len &#x26;&#x26; (typeof arguments[i] === &#x22;string&#x22;)) {
+    while (i &lt; len &amp;&amp; (typeof arguments[i] === "string")) {
 ...</pre></li>
     </ul>
 
@@ -327,3 +322,4 @@ if (cliPath) {
     ]
 </div>
 </div>
+</body></html>
